@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -19,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    BusinessCard()
                 }
             }
         }
@@ -82,7 +82,11 @@ fun BusinessCard() {
             modifier = Modifier.weight(7f)
         )
 
-        RowsOfBusinessCard(painter = painterResource(id = androidx.core.R.drawable.notification_bg_normal), text = "Telefono")
+        RowsOfBusinessCard(
+            painter = painterResource(id = R.drawable.android_logo),
+            text = "Telefono",
+            modifier = Modifier.weight(7f)
+        )
 
     }
 
@@ -104,7 +108,7 @@ fun HeaderOfBusinessCard(
             contentDescription = stringResource(R.string.icon_of_android_studio),
             modifier = Modifier
                 .fillMaxWidth(0.25f)
-                .align(Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally),
         )
 
         Text(
@@ -140,11 +144,15 @@ fun RowsOfBusinessCard(
     modifier: Modifier = Modifier
 ) {
     Row(
-        Modifier
-            .fillMaxWidth()
-            .border(BorderStroke(width = 1.dp, color = Color.White))
+        Modifier.fillMaxWidth()
+            .border(BorderStroke(width = 1.dp, color = Color.White)),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(painter = painter, contentDescription = null, modifier = Modifier.weight(1f))
+        androidx.compose.material3.Icon(
+            painter = painterResource(id = R.drawable.phone),
+            contentDescription = "Phone",
+            modifier = Modifier.height(36.dp).weight(1f)
+        )
         Text(text = text, color = Color(0xFFFFFFFF), modifier = Modifier.weight(3f))
     }
 }
