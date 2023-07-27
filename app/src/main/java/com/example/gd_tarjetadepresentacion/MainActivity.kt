@@ -3,17 +3,20 @@ package com.example.gd_tarjetadepresentacion
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -71,7 +74,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun BusinessCard() {
     Column(
         Modifier
-            .fillMaxSize()
             .background(Color(0xFF073042))
     ) {
 
@@ -79,14 +81,28 @@ fun BusinessCard() {
             painterResource(id = R.drawable.android_logo),
             "Jennifer Doe",
             "Android Developer Extraordinaire",
+            modifier = Modifier.weight(1f)
+        )
+
+        RowsOfBusinessCard(
+            painter = painterResource(id = R.drawable.phone),
+            text = "+11 (123) 444 555 666",
             modifier = Modifier.weight(7f)
         )
 
         RowsOfBusinessCard(
-            painter = painterResource(id = R.drawable.android_logo),
-            text = "Telefono",
+            painter = painterResource(id = R.drawable.share),
+            text = "@AndroidDev",
             modifier = Modifier.weight(7f)
         )
+
+        RowsOfBusinessCard(
+            painter = painterResource(id = R.drawable.email),
+            text = "jen.dow@android.com",
+            modifier = Modifier.weight(7f)
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
 
     }
 
@@ -139,23 +155,37 @@ fun HeaderOfBusinessCard(
 
 @Composable
 fun RowsOfBusinessCard(
-    painter: Painter,
-    text: String = "Phone number",
-    modifier: Modifier = Modifier
+    painter: Painter, text: String = "Phone number", contentDescription : String? = null, modifier: Modifier = Modifier
 ) {
+    Divider(color = Color.White, thickness = 1.dp, modifier = Modifier.padding(start = 16.dp, end = 16.dp))
+
     Row(
-        Modifier.fillMaxWidth()
-            .border(BorderStroke(width = 1.dp, color = Color.White)),
-        verticalAlignment = Alignment.CenterVertically
+        Modifier
+            .fillMaxWidth()
+            .height(50.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
+
+
         androidx.compose.material3.Icon(
-            painter = painterResource(id = R.drawable.phone),
-            contentDescription = "Phone",
-            modifier = Modifier.height(36.dp).weight(1f)
+            painter = painter,
+            contentDescription = contentDescription,
+            modifier = Modifier
+                .height(30.dp)
+                .weight(1f)
+                .fillMaxWidth(),
+            tint = Color(0xFF3ddc84)
         )
-        Text(text = text, color = Color(0xFFFFFFFF), modifier = Modifier.weight(3f))
+
+        Text(
+            text = text, color = Color(0xFFFFFFFF), fontSize = 16.sp, modifier = Modifier.weight(3f)
+        )
     }
+
+
 }
+
 
 @Preview(showBackground = true)
 @Composable
